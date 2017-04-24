@@ -1,0 +1,15 @@
+# Created by .ignore support plugin (hsz.mobi)
+### crawler template
+# Python相关文件和目录
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 测试文件目录
+test/
+
+# Intellj相关目录和文件
+.idea/
+*.iml
+out/
+gen/
