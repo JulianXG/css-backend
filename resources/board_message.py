@@ -1,5 +1,7 @@
 # coding=utf-8
 import datetime
+
+import logging
 from flask_restful import Resource, marshal_with, reqparse
 from sqlalchemy import or_, and_
 
@@ -8,6 +10,8 @@ import models
 from app import db
 from common import util
 from common.reqparser_element import DateTime
+
+logger = logging.getLogger(__name__)
 
 
 class BoardMessageResource(Resource):
@@ -32,7 +36,7 @@ class BoardMessageResource(Resource):
             return config.USER_NOT_EXISTS
         # 如果有置顶，则判断用户权限
         is_top = args['isTop']
-        if is_top is not None:
+        if is_top is not None and is_top == 1:
             if user.roleId != config.ROLE_PROPERTY:
                 return config.INSUFFICIENT_PRIVILEGE
 
