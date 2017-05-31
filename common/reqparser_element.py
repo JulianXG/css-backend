@@ -21,4 +21,7 @@ class DateTime(object):
             return datetime.datetime.strptime(format_print,
                                               config.DATETIME_FORMAT)
         elif isinstance(source, unicode):
-            return datetime.datetime.strptime(source, config.DATETIME_FORMAT)
+            if len(source) == 10:
+                return datetime.datetime.strptime(source, config.DATE_FORMAT)
+            else:
+                return datetime.datetime.strptime(source, config.DATETIME_FORMAT)

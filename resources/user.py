@@ -50,16 +50,22 @@ class UserResource(Resource):
 
     @marshal_with(config.RESPONSE_FIELD)
     def put(self, user_id):
-        pre_user = models.User.filter_by(id=user_id).first()
+        pre_user = models.User.query.filter_by(id=user_id).first()
         if pre_user is None:
             return config.RESOURCE_NOT_EXISTS
         else:
             parser = self.parser
             parser.replace_argument('password', required=False)
+            parser.replace_argument('username', required=False)
+            parser.replace_argument('roleId', type=int, required=False)
+            parser.replace_argument('communityId', type=int, required=False)
             user = parser.parse_args()
-            for key, value in user:
+            for key, value in user.iteritems():
                 if value is not None:
-                    setattr(pre_user, key, value)
+                    if isinstance(value, int) and value == 0:
+                        continue
+                    else:
+                        setattr(pre_user, key, value)
 
 
 class LoginResource(Resource):

@@ -6,6 +6,8 @@ from flask_cors import CORS
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 
+import config
+
 reload(sys)
 sys.setdefaultencoding("utf-8")
 logging.basicConfig(level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S',
@@ -14,7 +16,7 @@ logging.basicConfig(level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S',
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@mysql:3306/css?charset=utf8'
+app.config['SQLALCHEMY_DATABASE_URI'] = config.DB_URL
 app.config['SQLALCHEMY_RECORD_QUERIES'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['BUNDLE_ERRORS'] = True

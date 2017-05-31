@@ -2,7 +2,7 @@
 
 部署
 ```docker
-docker run --name css -d -p 0.0.0.0:2000:5000 -v /docker/css:/code --link mysql:mysql css:1
+docker run --name css -d -p 0.0.0.0:2000:5000 -v /docker/css-backend:/code --link mysql:mysql css:1
 ```
 
 >   2017-5-6

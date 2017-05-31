@@ -1,6 +1,8 @@
 # coding=utf-8
 from flask_restful import fields
 
+DB_URL = 'mysql://root:root@mysql:3306/css?charset=utf8'
+# DB_URL = 'mysql://root:ease1234@mysql:3306/css?charset=utf8'
 
 DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 DATE_FORMAT = '%Y-%m-%d'
