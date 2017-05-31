@@ -14,11 +14,11 @@ logging.basicConfig(level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S',
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:ease1234@mysql:3306/css?charset=utf8'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@mysql:3306/css?charset=utf8'
 app.config['SQLALCHEMY_RECORD_QUERIES'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['BUNDLE_ERRORS'] = True
-db = SQLAlchemy(app)
+db = SQLAlchemy(app, session_options={'autocommit': True})
 CORS(app, supports_credentials=True)
 
 import models

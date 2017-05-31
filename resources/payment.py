@@ -28,21 +28,16 @@ class PropertyFee(Resource):
             .filter_by(communityId=community_id)\
             .count()
         if pre_count == 0:
-            try:
-                houses = models.House.query.filter_by(communityId=community_id).all()
-                for house in houses:
-                    fee = models.PropertyFee()
-                    fee.communityId = community_id
-                    fee.houseId = house.id
-                    fee.status = config.PAY_REQUIRED
-                    fee.year = year
-                    fee.deadline = deadline
-                    fee.amount = house.propertyFee
-                    db.session.add(fee)
-                db.session.commit()
-            except:
-                db.session.rollback()
-                return config.COMMON_ERROR
+            houses = models.House.query.filter_by(communityId=community_id).all()
+            for house in houses:
+                fee = models.PropertyFee()
+                fee.communityId = community_id
+                fee.houseId = house.id
+                fee.status = config.PAY_REQUIRED
+                fee.year = year
+                fee.deadline = deadline
+                fee.amount = house.propertyFee
+                db.session.add(fee)
 
     @marshal_with(config.RESPONSE_FIELD)
     def get(self, community_id, page_size, page):

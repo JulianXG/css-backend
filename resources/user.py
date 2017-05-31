@@ -40,7 +40,6 @@ class UserResource(Resource):
         for key, value in user.iteritems():
             setattr(user_model, key, value)
         db.session.add(user_model)
-        db.session.commit()
 
     @marshal_with(config.RESPONSE_FIELD)
     def get(self, user_id):
@@ -55,15 +54,12 @@ class UserResource(Resource):
         if pre_user is None:
             return config.RESOURCE_NOT_EXISTS
         else:
-            try:
-                user = self.parser.parse_args()
-                for key, value in user:
-                    if value is not None:
-                        setattr(pre_user, key, value)
-                db.session.commit()
-            except:
-                db.session.rollback()
-                return config.COMMON_ERROR
+            parser = self.parser
+            parser.replace_argument('password', required=False)
+            user = parser.parse_args()
+            for key, value in user:
+                if value is not None:
+                    setattr(pre_user, key, value)
 
 
 class LoginResource(Resource):
@@ -102,7 +98,6 @@ class PasswordResource(Resource):
             return config.RESOURCE_NOT_EXISTS
         else:
             user.password = password
-            db.session.commit()
 
 
 class UserHouseResource(Resource):
@@ -124,4 +119,3 @@ class UserHouseResource(Resource):
                 return config.PROPERTY_NOT_ALLOW_CHANGE_HOUSE
             else:
                 user.houseId = house_id
-                db.session.commit()

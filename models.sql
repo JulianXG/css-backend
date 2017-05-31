@@ -34,6 +34,7 @@ CREATE TABLE `community` (
   `property_id` INT DEFAULT NULL COMMENT '物业ID',
   `name` VARCHAR(20) DEFAULT NULL COMMENT '社区名称',
   `address` VARCHAR(40) DEFAULT NULL COMMENT '社区地址',
+  `third_party_id` VARCHAR(80) DEFAULT NULL COMMENT '第三方ID',
   `code` VARCHAR(40) DEFAULT NULL COMMENT '社区码',
   `cooperation_time` DATETIME DEFAULT NULL COMMENT '合作时间',
   `create_time` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',

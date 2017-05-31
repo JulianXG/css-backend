@@ -42,14 +42,9 @@ class BoardMessageResource(Resource):
 
         message = models.BoardMessage()
         message.communityId = user.communityId
-        try:
-            for key, value in args.iteritems():
-                setattr(message, key, value)
-            db.session.add(message)
-            db.session.commit()
-        except:
-            db.session.rollback()
-            return config.COMMON_ERROR
+        for key, value in args.iteritems():
+            setattr(message, key, value)
+        db.session.add(message)
 
     @marshal_with(config.RESPONSE_FIELD)
     def get(self, community_id, page_size, page):

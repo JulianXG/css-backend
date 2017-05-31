@@ -35,7 +35,6 @@ class RepairResource(Resource):
         for key, value in args.iteritems():
             setattr(repair, key, value)
         db.session.add(repair)
-        db.session.commit()
 
     @marshal_with(config.RESPONSE_FIELD)
     def get(self, community_id, page_size, page):
@@ -82,4 +81,4 @@ class RepairResource(Resource):
             return config.RESOURCE_NOT_EXISTS
         else:
             repair.status = status
-            db.session.commit()
+            # db.session.commit()
