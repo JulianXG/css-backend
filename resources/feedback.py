@@ -20,3 +20,5 @@ class FeedbackResource(Resource):
         for key, value in data.iteritems():
             setattr(feedback, key, value)
         db.session.add(feedback)
+        # 似乎插入操作需要进行一遍数据库访问操作才可以应用到数据库当中去
+        models.Community.query.first()
