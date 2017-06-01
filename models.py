@@ -89,3 +89,10 @@ class Repair(db.Model):
     expectHandleTime = db.Column('expect_handle_time', db.DateTime)
     description = db.Column(db.String)
     status = db.Column(db.Integer)
+
+
+class Feedback(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    userId = db.Column('user_id', db.Integer, db.ForeignKey('user.id'))
+    content = db.Column(db.TEXT)
+    postTime = db.Column('post_time', db.DateTime)

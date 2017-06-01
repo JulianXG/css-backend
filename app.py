@@ -32,6 +32,7 @@ from resources.community import CommunityCodeValidateResource, \
 from resources.payment import PropertyFee, PropertyFeeStatus
 from resources.repair import RepairResource
 from resources.house import HouseResource, HouseIdResource
+from resources.feedback import FeedbackResource
 
 v1_blueprint = Blueprint('api', __name__)
 api = Api(v1_blueprint)
@@ -53,6 +54,8 @@ api.add_resource(HouseResource, '/houses/<int:community_id>')
 api.add_resource(HouseIdResource, '/houses')
 api.add_resource(PropertyFeeStatus,
                  '/propertyFee/status/<int:community_id>/<year>')
+api.add_resource(FeedbackResource, '/feedback')
+
 
 app.register_blueprint(v1_blueprint, url_prefix='/v1')
 
